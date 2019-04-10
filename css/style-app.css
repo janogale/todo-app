@@ -2,6 +2,8 @@ html,
 body {
     margin: 0;
     padding: 0;
+    font-size: 16px;
+    padding-top: 0.5rem;
 }
 
 button {
@@ -71,7 +73,7 @@ body {
     position: absolute;
     top: -155px;
     width: 100%;
-    font-size: 4.5rem;
+    font-size: 4rem;
     font-weight: 100;
     text-align: center;
     color: #119d11b3;
