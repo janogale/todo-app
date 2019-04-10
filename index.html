@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+    <meta http-equiv=" Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Todo List App</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="app">
+        <section class="todoapp">
+            <header class="header">
+                <h1>Todo List App</h1><input id="new-todo" class="new-todo" placeholder="What needs to be done?" autofocus="">
+            </header>
+            <section class="main" id="main" style="display:block"><input id="toggle-all" type="checkbox" class="toggle-all"><label for="toggle-all">Mark all as complete</label>
+
+                <!-- todo List-->
+                <ul class="todo-list">
+
+                    <li data-id="4" id="4" class="completed">
+                        <div class="view"><input checked="true" class="toggle" type="checkbox"><label>read adkar</label><button class="destroy"></button></div>
+                    </li>
+                    <li data-id="5" id="5">
+                        <div class="view"><input class="toggle" type="checkbox"><label>go masjid</label><button class="destroy"></button></div>
+                    </li>
+
+                </ul>
+            </section>
+            <footer class="footer" id="footer" style="display:block"><span class="todo-count"><strong id="count"></strong> Pending</span>
+                <ul class="filters">
+                    <li><a href="#/" id="all" class="selected">All</a></li>
+                    <li><a href="#/active" id="active" class="">Active</a></li>
+                    <li><a href="#/completed" id="completed" class="">Completed</a></li>
+                </ul><button class="clear-completed" style="display:block;">Clear completed [<span id="completed-count">0</span>]</button>
+            </footer>
+        </section>
+    </div>
+
+    <link rel="stylesheet" href="css/style-app.css">
+
+    <script src="js/app.js"></script>
+
+
+</body>
+
+</html>
