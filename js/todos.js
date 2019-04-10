@@ -62,4 +62,23 @@ document.querySelector('.toggle-all + label').addEventListener('click', (e) => {
     li.hidden = !li.hidden;
   })
 
-})
+});
+
+
+// tick, delete, disable.
+
+document.querySelector('.todo-list').addEventListener('click', (e) => {
+
+// strike-through the list
+
+  if (e.target.nodeName === 'INPUT') {
+    e.target.parentElement.classList.toggle('inactive')
+  }
+  
+  // delete list.
+  if (e.target.nodeName === 'BUTTON' && e.target.parentElement.firstElementChild.checked) {
+    
+    e.target.parentElement.parentElement.remove();
+  }
+
+});

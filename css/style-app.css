@@ -279,6 +279,10 @@ label.label {
     margin-bottom: -1px;
 }
 
+li div.inactive {
+    color: #d2d3d2;
+    text-decoration: line-through;
+}
 .footer {
     color: #fff;
     background: #55b755;
