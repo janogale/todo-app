@@ -36,14 +36,30 @@ document.getElementById('completed').addEventListener('click', (e) => {
 
 // display filters.
 
-function filterDisplay () {
+function filterDisplay() {
   if (app.completedTodos) {
     document.getElementById('completed-count').textContent = app.completedTodos
   }
 
-  if (app.activeTodos ) {
+  if (app.activeTodos) {
     document.getElementById('count').textContent = app.activeTodos
   }
 }
 
 filterDisplay()
+
+// toggle view of the list
+
+
+document.querySelector('.toggle-all + label').addEventListener('click', (e) => {
+
+  //toggle class
+  e.target.classList.toggle('label');
+
+  // toggle list
+
+  Array.from(list.children).forEach(li => {
+    li.hidden = !li.hidden;
+  })
+
+})
