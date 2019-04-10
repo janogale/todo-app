@@ -1,69 +1,118 @@
-// display todos.
+/*
+ * Todo List App
+ * Developed for JavaScript Learning Purpose
+ * author Janagale
+ *  @app
+ */
 
-app.renderTodos(app.todos);
+// parent element to append todos.
 
+let list = document.querySelector('.todo-list')
 
-document.addEventListener('keypress', (e) => {
-
-    if (e.keyCode === 13) {
-        app.addNewTodo();
-        filterDisplay();
-
+const app = {
+  todos: [
+    {
+      id: 1,
+      name: 'Wake up at 4',
+      status: true
+    },
+    {
+      id: 2,
+      name: 'Brush Teeth & Dress',
+      status: false
+    },
+    {
+      id: 3,
+      name: 'Go to Masjid',
+      status: true
+    },
+    {
+      id: 4,
+      name: 'read Quran',
+      status: true
+    },
+    {
+      id: 5,
+      name: 'Go to Work',
+      status: false
     }
 
-});
+  ],
 
+  get allTodos () {
+    return this.todos.map(i => i).length
+  },
 
+  get activeTodos () {
+    return this.todos.filter(todo => todo.status === true).length
+  },
 
+  get completedTodos () {
+    return this.todos.filter(todo => todo.status === false).length
+  },
 
+  // display todos
 
+  renderTodos (todos = {}) {
+    // clear display before rendering
+    this.clearTodos()
 
+    todos.forEach((item, index) => {
+      list.insertAdjacentHTML('beforeend', `<li data-id="${index}" id="${item.id}">
+                        <div class="view"><input class="toggle" type="checkbox"><label>${item.name}</label><button class="destroy"></button></div>
+                    </li>`)
+    })
+  },
 
-// display active todos
+  // new todo to the List.
 
+  addNewTodo () {
+    let btnInput = document.getElementById('new-todo')
 
-document.getElementById('active').addEventListener('click', (e) => {
+    // stop if there is no input
+    if (!btnInput.value) {
+      btnInput.placeholder = 'please enter value here'
 
-    console.log("Displaying only active todos.");
-
-    app.renderActiveOnly();
-});
-
-// display all todos.
-
-document.getElementById('all').addEventListener('click', (e) => {
-
-    console.log("Displaying all todos.");
-
-    app.renderTodos(app.todos);
-});
-
-
-// display completed todos.
-
-document.getElementById('completed').addEventListener('click', (e) => {
-
-    console.log("Displaying completed todos.");
-
-    app.renderCompletedTodos();
-});
-
-
-
-// display filters.
-
-
-function filterDisplay() {
-    if (app.completedTodos()) {
-
-        document.getElementById('completed-count').textContent = app.completedTodos();
+      return
     }
 
-    if (app.activeTodos()) {
-
-        document.getElementById('count').textContent = app.activeTodos();
+    let newTodo = {
+      id: this.todos.length + 1,
+      name: btnInput.value,
+      status: true
     }
-}
 
+    this.todos.push(newTodo)
 
-filterDisplay()
+    // render view
+    this.renderTodos(this.todos)
+
+    // clear input
+
+    btnInput.value = ''
+  },
+
+  renderActiveOnly () {
+    const activeTodos = this.todos.filter((todo) => {
+      return todo.status === true
+    })
+
+    this.renderTodos(activeTodos)
+  },
+
+  // completed todos.
+
+  renderCompletedTodos () {
+    const completed = this.todos.filter((todo) => {
+      return todo.status === false
+    })
+
+    this.renderTodos(completed)
+  },
+
+  // clear UL children before update
+  clearTodos () {
+    Array.from(list.children).forEach(li => li.remove())
+  }
+
+};

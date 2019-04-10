@@ -295,6 +295,12 @@ body {
     text-align: left;
 }
 
+#count {
+    background: #e0723d;
+    padding: 3px 8px;
+    border-radius: 50%;
+}
+
 .todo-count strong {
     font-weight: 300;
 }
