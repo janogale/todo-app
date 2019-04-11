@@ -128,7 +128,7 @@ body {
 }
 
 .toggle-all+label {
-    color: #4CAF50;
+    color: #fff;
     width: 60px;
     height: 34px;
     font-size: 0;
@@ -147,15 +147,14 @@ label.label {
 }
 
 .toggle-all+label:before {
-    content: '>';
+    content: '>>';
     font-family: monospace;
-    font-size: 40px;
-   
-    padding: 10px 27px 10px 27px;
+    font-size: 24px;
+    padding: 10px 8px 10px 23px;
 }
 
 .toggle-all:checked+label:before {
-    color: #737373;
+    color: #d8d8d8ff;
 }
 
 .todo-list {
