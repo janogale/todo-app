@@ -10,8 +10,8 @@
 let list = document.querySelector('.todo-list')
 
 const app = {
-  
-  //read todos from localStorage or set empty object
+
+  // read todos from localStorage or set empty object
   todos: JSON.parse(localStorage.getItem('todos')) || [],
 
   get allTodos () {
@@ -19,11 +19,11 @@ const app = {
   },
 
   get activeTodos () {
-    return this.todos.filter(todo => todo.status === true).length
+    return this.todos.filter(todo => todo.status === false).length
   },
 
   get completedTodos () {
-    return this.todos.filter(todo => todo.status === false).length
+    return this.todos.filter(todo => todo.status === true).length
   },
 
   // display todos
@@ -35,7 +35,7 @@ const app = {
 
     todos.forEach((item, index) => {
       list.insertAdjacentHTML('beforeend', `<li data-id="${index}" id="${item.id}">
-                        <div class="view"><input class="toggle" type="checkbox"><label>${item.name}</label><button class="destroy"></button></div>
+                        <div class="view ${item.status ? 'inactive' : ''}"><input class="toggle" type="checkbox" ${item.status ? 'checked' : ''}><label>${item.name}</label><button class="destroy"></button></div>
                     </li>`)
     })
   },
@@ -55,13 +55,13 @@ const app = {
     let newTodo = {
       id: this.todos.length + 1,
       name: btnInput.value,
-      status: true
+      status: false
     }
 
     this.todos.push(newTodo)
 
     // set local storage
-    localStorage.setItem('todos', JSON.stringify(this.todos));
+    localStorage.setItem('todos', JSON.stringify(this.todos))
     // render view
     this.renderTodos(this.todos)
 
@@ -72,7 +72,7 @@ const app = {
 
   renderActiveOnly () {
     const activeTodos = this.todos.filter((todo) => {
-      return todo.status === true
+      return todo.status === false
     })
 
     this.renderTodos(activeTodos)
@@ -82,7 +82,7 @@ const app = {
 
   renderCompletedTodos () {
     const completed = this.todos.filter((todo) => {
-      return todo.status === false
+      return todo.status === true
     })
 
     this.renderTodos(completed)
@@ -93,4 +93,4 @@ const app = {
     Array.from(list.children).forEach(li => li.remove())
   }
 
-};
+}

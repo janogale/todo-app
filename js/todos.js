@@ -36,7 +36,10 @@ document.getElementById('completed').addEventListener('click', (e) => {
 
 // display filters.
 
-function filterDisplay() {
+function filterDisplay () {
+  document.getElementById('completed-count').textContent = 0
+  document.getElementById('count').textContent = 0
+
   if (app.completedTodos) {
     document.getElementById('completed-count').textContent = app.completedTodos
   }
@@ -48,46 +51,50 @@ function filterDisplay() {
 
 filterDisplay()
 
-// toggle view of the list
-
+// toggle show/hide
 
 document.querySelector('.toggle-all + label').addEventListener('click', (e) => {
-
-  //toggle class
-  e.target.classList.toggle('label');
+  // toggle class
+  e.target.classList.toggle('label')
 
   // toggle list
 
   Array.from(list.children).forEach(li => {
-    li.hidden = !li.hidden;
+    li.hidden = !li.hidden
   })
-
-});
-
+})
 
 // tick, delete, disable.
 
 document.querySelector('.todo-list').addEventListener('click', (e) => {
+  // get index of item.
 
-// strike-through the list
+  let index = e.target.parentElement.parentElement.dataset.id
+
+  // strike-through the list
 
   if (e.target.nodeName === 'INPUT') {
     e.target.parentElement.classList.toggle('inactive')
+
+    // setting list status
+    app.todos[index].status = !app.todos[index].status
+
+    // re-assing localStorage
+    localStorage.setItem('todos', JSON.stringify(app.todos))
+
+    filterDisplay()
   }
-  
+
   // delete list.
   if (e.target.nodeName === 'BUTTON' && e.target.parentElement.firstElementChild.checked) {
+    app.todos.splice(index, 1)
 
-    // get index of item.
+    localStorage.setItem('todos', JSON.stringify(app.todos))
 
-   let index = e.target.parentElement.parentElement.dataset.id;
+    // refresh data
+    filterDisplay()
 
-
-   app.todos.splice(index, 1);
-
-   localStorage.setItem('todos', JSON.stringify(app.todos));
-
-  e.target.parentElement.parentElement.remove();
+    // remove element.
+    e.target.parentElement.parentElement.remove()
   }
-
-});
+})
