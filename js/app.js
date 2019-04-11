@@ -10,34 +10,9 @@
 let list = document.querySelector('.todo-list')
 
 const app = {
-  todos: [
-    {
-      id: 1,
-      name: 'Wake up at 4',
-      status: true
-    },
-    {
-      id: 2,
-      name: 'Brush Teeth & Dress',
-      status: false
-    },
-    {
-      id: 3,
-      name: 'Go to Masjid',
-      status: true
-    },
-    {
-      id: 4,
-      name: 'read Quran',
-      status: true
-    },
-    {
-      id: 5,
-      name: 'Go to Work',
-      status: false
-    }
-
-  ],
+  
+  //read todos from localStorage or set empty object
+  todos: JSON.parse(localStorage.getItem('todos')) || [],
 
   get allTodos () {
     return this.todos.map(i => i).length
@@ -55,6 +30,7 @@ const app = {
 
   renderTodos (todos = {}) {
     // clear display before rendering
+
     this.clearTodos()
 
     todos.forEach((item, index) => {
@@ -84,6 +60,8 @@ const app = {
 
     this.todos.push(newTodo)
 
+    // set local storage
+    localStorage.setItem('todos', JSON.stringify(this.todos));
     // render view
     this.renderTodos(this.todos)
 

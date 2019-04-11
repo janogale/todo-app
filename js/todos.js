@@ -77,8 +77,17 @@ document.querySelector('.todo-list').addEventListener('click', (e) => {
   
   // delete list.
   if (e.target.nodeName === 'BUTTON' && e.target.parentElement.firstElementChild.checked) {
-    
-    e.target.parentElement.parentElement.remove();
+
+    // get index of item.
+
+   let index = e.target.parentElement.parentElement.dataset.id;
+
+
+   app.todos.splice(index, 1);
+
+   localStorage.setItem('todos', JSON.stringify(app.todos));
+
+  e.target.parentElement.parentElement.remove();
   }
 
 });
