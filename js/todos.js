@@ -36,7 +36,7 @@ document.getElementById('completed').addEventListener('click', (e) => {
 
 // display filters.
 
-function filterDisplay () {
+function filterDisplay() {
   document.getElementById('completed-count').textContent = 0
   document.getElementById('count').textContent = 0
 
@@ -83,6 +83,11 @@ document.querySelector('.todo-list').addEventListener('click', (e) => {
     localStorage.setItem('todos', JSON.stringify(app.todos))
 
     filterDisplay()
+  }
+
+  // alert please tick item
+  if (e.target.nodeName === 'BUTTON' && !e.target.parentElement.firstElementChild.checked) {
+    alert('Please tick Item first, to delete it.')
   }
 
   // delete list.
