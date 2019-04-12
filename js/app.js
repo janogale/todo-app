@@ -7,28 +7,30 @@
 
 // parent element to append todos.
 
-let list = document.querySelector('.todo-list')
+const list = document.querySelector('.todo-list')
+const main = document.getElementById('main')
+const footer = document.getElementById('footer')
 
 const app = {
 
   // read todos from localStorage or set empty object
   todos: JSON.parse(localStorage.getItem('todos')) || [],
 
-  get allTodos () {
+  get allTodos() {
     return this.todos.map(i => i).length
   },
 
-  get activeTodos () {
+  get activeTodos() {
     return this.todos.filter(todo => todo.status === false).length
   },
 
-  get completedTodos () {
+  get completedTodos() {
     return this.todos.filter(todo => todo.status === true).length
   },
 
   // display todos
 
-  renderTodos (todos = {}) {
+  renderTodos(todos = {}) {
     // clear display before rendering
 
     this.clearTodos()
@@ -42,7 +44,7 @@ const app = {
 
   // new todo to the List.
 
-  addNewTodo () {
+  addNewTodo() {
     let btnInput = document.getElementById('new-todo')
 
     // stop if there is no input
@@ -65,12 +67,18 @@ const app = {
     // render view
     this.renderTodos(this.todos)
 
+    // show main block and footer if hidden 
+
+    if (main.hidden || footer.hidden) {
+      main.hidden = false
+      footer.hidden = false
+    }
     // clear input
 
     btnInput.value = ''
   },
 
-  renderActiveOnly () {
+  renderActiveOnly() {
     const activeTodos = this.todos.filter((todo) => {
       return todo.status === false
     })
@@ -80,7 +88,7 @@ const app = {
 
   // completed todos.
 
-  renderCompletedTodos () {
+  renderCompletedTodos() {
     const completed = this.todos.filter((todo) => {
       return todo.status === true
     })
@@ -89,7 +97,7 @@ const app = {
   },
 
   // clear UL children before update
-  clearTodos () {
+  clearTodos() {
     Array.from(list.children).forEach(li => li.remove())
   }
 

@@ -1,4 +1,11 @@
 
+//hide main div and footer if there is no tasks
+
+if (!app.todos.length) {
+  main.hidden = true
+  footer.hidden = true
+}
+
 // display todos.
 
 app.renderTodos(app.todos)
@@ -30,7 +37,6 @@ document.getElementById('all').addEventListener('click', (e) => {
 
 document.getElementById('completed').addEventListener('click', (e) => {
   console.log('Displaying completed todos.')
-
   app.renderCompletedTodos()
 })
 
@@ -103,3 +109,4 @@ document.querySelector('.todo-list').addEventListener('click', (e) => {
     e.target.parentElement.parentElement.remove()
   }
 })
+
